@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "auto-clone"
+version = "0.1.0"
+description = ""
+authors = ["e.sergeev <egor.sierghieiev@mail.ru>"]
+readme = "README.md"
+packages = [{include = "auto_clone"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.0"
+aiogram = "^2.25.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
