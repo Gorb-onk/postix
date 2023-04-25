@@ -1,7 +1,7 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 
-class BasePublisher:
+class BasePublisher(ABC):
     async def __aenter__(self):
         return self
 
