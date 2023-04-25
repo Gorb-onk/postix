@@ -1,12 +1,11 @@
 from aiogram import Bot
 
+from publishers.base import BasePublisher
 
-class TelegramPublisher:
+
+class TelegramPublisher(BasePublisher):
     def __init__(self, token: str):
         self.bot = Bot(token=token)
-
-    async def __aenter__(self):
-        return self
 
     async def send(self, chat_id: str, text: str) -> None:
         await self.bot.send_message(chat_id, text)
