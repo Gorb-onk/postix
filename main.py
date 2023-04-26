@@ -18,11 +18,6 @@ async def process_queue(queue: Queue, processor: MessageProcessor):
         await processor.process(msg)
 
 
-async def run_publishers():
-    async with TelegramPublisher(config.TELEGRAM_BOT_TOKEN) as tg_publisher:
-        await tg_publisher.send('@tefsdafasdf', 'test')
-
-
 async def main():
     source_channels = [1757653513]
     target_channels = ['@tefsdafasdf']

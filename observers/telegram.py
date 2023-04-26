@@ -3,6 +3,7 @@ from asyncio import Queue
 from telethon import TelegramClient, events
 
 from observers.base import BaseObserver
+from dto import Message
 
 
 class TelegramObserver(BaseObserver):
@@ -16,7 +17,8 @@ class TelegramObserver(BaseObserver):
         await self.client.run_until_disconnected()
 
     async def process_message(self, event: events.NewMessage) -> None:
-        await self.put_message_to_queue(event.raw_text)
+        msg = Message(text=event.message.text)
+        await self.put_message_to_queue(msg)
 
-    async def put_message_to_queue(self, message: str) -> None:
+    async def put_message_to_queue(self, message: Message) -> None:
         await self.queue.put(message)
