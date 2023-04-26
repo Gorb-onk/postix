@@ -15,12 +15,14 @@ async def read_queue(queue: Queue):
     while True:
         msg = await queue.get()
         print(msg)
+        # Цикл: сам реагирует на своё сообщение
+        async with TelegramPublisher(config.TELEGRAM_BOT_TOKEN) as tg_publisher:
+            await tg_publisher.send('@tefsdafasdf', msg)
 
 
 async def run_publishers():
     async with TelegramPublisher(config.TELEGRAM_BOT_TOKEN) as tg_publisher:
         await tg_publisher.send('@tefsdafasdf', 'test')
-        await asyncio.sleep(1)
 
 
 async def main():

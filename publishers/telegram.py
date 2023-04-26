@@ -8,7 +8,7 @@ class TelegramPublisher(BasePublisher):
         self.bot = Bot(token=token)
 
     async def send(self, chat_id: str, text: str) -> None:
-        await self.bot.send_message(chat_id, text)
+        await self.bot.send_message(chat_id=chat_id, text=text)
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         session = await self.bot.get_session()
