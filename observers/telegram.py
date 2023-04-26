@@ -10,8 +10,8 @@ class TelegramObserver(BaseObserver):
         super().__init__(messages_queue)
         self.client = TelegramClient(session, api_id, api_hash)
 
-    async def run(self, chat_id: str) -> None:
-        self.client.on(events.NewMessage(chats=chat_id, incoming=True))(self.process_message)
+    async def run(self, chat_ids: list[str | int]) -> None:
+        self.client.on(events.NewMessage(chats=chat_ids, incoming=True))(self.process_message)
         await self.client.start()
         await self.client.run_until_disconnected()
 
