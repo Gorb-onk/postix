@@ -17,7 +17,10 @@ class TelegramObserver(BaseObserver):
         await self.client.run_until_disconnected()
 
     async def process_message(self, event: events.NewMessage) -> None:
-        msg = Message(text=event.message.text)
+        file = await self.client.download_media(event.message, file=bytes)
+        a = await self.client.download_media(event.message, file='./media/')
+        print(a, print(event.message.id))
+        msg = Message(text=event.message.text, photo=file)
         await self.put_message_to_queue(msg)
 
     async def put_message_to_queue(self, message: Message) -> None:

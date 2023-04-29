@@ -8,8 +8,9 @@ from message_processor import MessageProcessor
 
 
 async def run_observers(queue: Queue, channels: list[str | int]) -> None:
-    await TelegramObserver(queue, config.TELEGRAM_ADMIN_SESSION_PATH, config.TELEGRAM_API_ID, config.TELEGRAM_API_HASH). \
-        run(channels)
+    observer = TelegramObserver(queue, config.TELEGRAM_ADMIN_SESSION_PATH, config.TELEGRAM_API_ID,
+                                config.TELEGRAM_API_HASH)
+    await observer.run(channels)
 
 
 async def process_queue(queue: Queue, processor: MessageProcessor):
@@ -31,4 +32,3 @@ async def main():
     )
 
 asyncio.run(main())
-
