@@ -1,3 +1,4 @@
+import asyncio
 from asyncio import Queue
 
 from telethon import TelegramClient, events
@@ -7,6 +8,8 @@ from dto import Message
 
 
 class TelegramObserver(BaseObserver):
+    albums = {}
+
     def __init__(self, messages_queue: Queue, session: str, api_id: int, api_hash: str):
         super().__init__(messages_queue)
         self.client = TelegramClient(session, api_id, api_hash)
@@ -17,10 +20,19 @@ class TelegramObserver(BaseObserver):
         await self.client.run_until_disconnected()
 
     async def process_message(self, event: events.NewMessage) -> None:
-        file = await self.client.download_media(event.message, file=bytes)
-        a = await self.client.download_media(event.message, file='./media/')
-        print(a, print(event.message.id))
-        msg = Message(text=event.message.text, photo=file)
+        photo = await self.client.download_media(event.message, file=bytes)
+        if event.grouped_id:
+            pair = (event.chat_id, event.grouped_id)
+            if pair in self.albums:
+                self.albums[pair].append(photo)
+                return
+            self.albums[pair] = [photo]
+            await asyncio.sleep(2)
+            photos = self.albums.pop(pair)
+        else:
+            photos = [photo]
+        msg = Message(text=event.message.text, photos=photos)
+
         await self.put_message_to_queue(msg)
 
     async def put_message_to_queue(self, message: Message) -> None:

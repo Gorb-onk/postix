@@ -25,6 +25,7 @@ async def main():
 
     queue = Queue()
     publisher = TelegramPublisher(config.TELEGRAM_BOT_TOKEN)
+    print('Starting')
     message_processor = MessageProcessor(publisher, target_channels)
     await asyncio.gather(
         run_observers(queue, source_channels),

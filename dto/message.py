@@ -1,7 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class Message:
     text: str
-    photo: bytes
+    photos: list[bytes] = field(default_factory=list)
+

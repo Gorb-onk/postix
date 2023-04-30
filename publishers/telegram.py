@@ -1,4 +1,7 @@
+from io import BytesIO
+
 from aiogram import Bot
+from aiogram.types import InputMediaPhoto, InputFile
 
 from dto import Message
 from publishers.base import BasePublisher
@@ -9,8 +12,12 @@ class TelegramPublisher(BasePublisher):
         self.bot = Bot(token=token)
 
     async def send(self, chat_id: str, msg: Message) -> None:
-        if msg.photo:
-            await self.bot.send_photo(chat_id=chat_id, photo=msg.photo, caption=msg.text)
+        if len(msg.photos) > 1:
+            media = [InputMediaPhoto(media=InputFile(BytesIO(photo))) for photo in msg.photos]
+            media[0].caption = msg.text
+            await self.bot.send_media_group(chat_id=chat_id, media=media)
+        elif len(msg.photos) == 1:
+            await self.bot.send_photo(chat_id=chat_id, photo=msg.photos[0], caption=msg.text)
         else:
             await self.bot.send_message(chat_id=chat_id, text=msg.text)
 
