@@ -3,8 +3,8 @@ from io import BytesIO
 from aiogram import Bot
 from aiogram.types import InputMediaPhoto, InputFile
 
-from dto import Message
-from publishers.base import BasePublisher
+from postix.dto import Message
+from postix.publishers.base import BasePublisher
 
 
 class TelegramPublisher(BasePublisher):

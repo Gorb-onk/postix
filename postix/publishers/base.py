@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 
-from dto import Message
+from postix.dto import Message
 
 
 class BasePublisher(ABC):

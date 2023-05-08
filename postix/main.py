@@ -31,5 +31,7 @@ async def main():
         run_observers(queue, source_channels),
         process_queue(queue, message_processor)
     )
-
-asyncio.run(main())
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    print('Finishing')

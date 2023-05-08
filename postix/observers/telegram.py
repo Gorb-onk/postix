@@ -3,8 +3,8 @@ from asyncio import Queue
 
 from telethon import TelegramClient, events
 
-from observers.base import BaseObserver
-from dto import Message
+from postix.observers.base import BaseObserver
+from postix.dto import Message
 
 
 class TelegramObserver(BaseObserver):
