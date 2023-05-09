@@ -1,6 +1,8 @@
 import asyncio
 from asyncio import Queue
 
+from aiocache import caches
+
 import config
 from observers import TelegramObserver
 from publishers import TelegramPublisher
@@ -8,8 +10,9 @@ from message_processor import MessageProcessor
 
 
 async def run_observers(queue: Queue, channels: list[str | int]) -> None:
+    cache = caches.get('default')
     observer = TelegramObserver(queue, config.TELEGRAM_ADMIN_SESSION_PATH, config.TELEGRAM_API_ID,
-                                config.TELEGRAM_API_HASH)
+                                config.TELEGRAM_API_HASH, cache=cache)
     await observer.run(channels)
 
 

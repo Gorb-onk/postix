@@ -11,6 +11,7 @@ python = "^3.10"
 python-dotenv = "^1.0.0"
 aiogram = "^2.25.1"
 telethon = "^1.28.5"
+aiocache = {extras = ["redis"], version = "^0.12.1"}
 
 [build-system]
 requires = ["poetry-core"]
