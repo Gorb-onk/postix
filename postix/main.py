@@ -38,3 +38,9 @@ try:
     asyncio.run(main())
 except KeyboardInterrupt:
     print('Finishing')
+
+# TODO: покрытие тестами
+# TODO: поддержка видео
+# TODO: поддержка документов
+# TODO: докер
+# TODO: ci

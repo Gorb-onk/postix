@@ -12,6 +12,9 @@ python-dotenv = "^1.0.0"
 aiogram = "^2.25.1"
 telethon = "^1.28.5"
 aiocache = {extras = ["redis"], version = "^0.12.1"}
+pytest = "^7.3.1"
+pytest-mock = "^3.10.0"
+pytest-asyncio = "^0.21.0"
 
 [build-system]
 requires = ["poetry-core"]
