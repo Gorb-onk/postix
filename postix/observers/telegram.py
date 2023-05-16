@@ -32,8 +32,10 @@ class TelegramObserver(BaseObserver):
 
             photos = await self.cache.get(album_uid)
             await self.cache.delete(album_uid)
-        else:
+        elif photo:
             photos = [photo]
+        else:
+            photos = []
         msg = Message(text=event.message.text, photos=photos)
 
         await self.put_message_to_queue(msg)

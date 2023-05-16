@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from aiocache import caches
+from aiocache import caches, SimpleMemoryCache
 
 load_dotenv()
 
@@ -25,6 +25,13 @@ caches.set_config({
             'class': "aiocache.serializers.PickleSerializer"
         },
         'plugins': []
-    }
+    },
+    'test': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'serializer': {
+            'class': "aiocache.serializers.PickleSerializer"
+        },
+        'plugins': []
+    },
 })
 

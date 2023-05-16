@@ -44,3 +44,4 @@ except KeyboardInterrupt:
 # TODO: поддержка документов
 # TODO: докер
 # TODO: ci
+# TODO: поддержка спойлеров
